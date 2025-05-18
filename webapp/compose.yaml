@@ -1,0 +1,27 @@
+services:
+  frontend:
+    image: react
+    command: TODO
+    ports:
+      - 127.0.0.1:3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+  backend:
+    image: node
+    command: TODO
+  postgresql:
+    image: postgresql
+    volumes:
+      - sql-data:/var/lib/postgresql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+
+volumes:
+  sql-data:
